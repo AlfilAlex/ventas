@@ -3,12 +3,12 @@
 #Agregar una venta para un dia determinado
 #Agregar una cantidad incial para un día determiando
 
-from tkinter import Tk, Button, Frame, Text, ttk, Label
+from tkinter import Tk, Button, Frame, Text, ttk, Label, END
 from coordinador import iniciadora
-from inicio import mainthing
+from productos import prodcutos
 #from tkinter import ttk
 
-from funciones_db import ventas
+from funciones_db import *
 
 
 clase_preparadora = 'clase_en_proceso'
@@ -27,17 +27,21 @@ def venta():
     prod_id = venta_Prod.get()
     sell_Num = venta_Num.get()
     ventas(prod_id, sell_Num)
-    print('Se hizo una venta')
-    pass
+    resumen = prod_Resum()
+    outputtxt.delete('1.0', END)
+    for producto in resumen:
+        outputtxt.insert(END, producto[2] + ' ' + str(producto[3]) + '\n')
 
-def iniciador():
+
+def add_Products():
     root = Tk()
-    app = mainthing(root)
+    app = prodcutos(root)
     root.mainloop()
     
 #Seccion de venta
 venta_Prod = ttk.Combobox(frame, state="readonly")
-venta_Prod["values"] = ["Dulce", "Mole", "Rajas_queso", "Rojos"]
+tabla = prod_Select()
+venta_Prod["values"] = [x[1] for x in tabla]
 venta_Prod.grid(row=0, column=0, padx=20, pady=30) #, padx=20, pady=30
 
 venta_Num = ttk.Combobox(frame)
@@ -63,7 +67,7 @@ outputtxt = Text(frame, height = 10, width = 25, bg = "light yellow")
 outputtxt.grid(row=3, column=1, padx=20, pady=30)
 
 
-boton_archivo = Button(frame, text='Productos A/B', command=iniciador)
+boton_archivo = Button(frame, text='Productos A/B', command = add_Products)
 boton_archivo.grid(row=4, column=0, padx=20, pady=30)
 
 
