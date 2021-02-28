@@ -4,7 +4,7 @@ from funciones_db import *
 
 class prodcutos(tk.Frame):
     """Esta clase abre una pestaña que permite posteriormente
-       agregar nuevos articulos a la base de datos en la tabal productos"""
+       agregar nuevos articulos a la base de datos en la tabla productos"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
@@ -52,7 +52,7 @@ class prodcutos(tk.Frame):
 
     def del_Product_class(self):
         prod_to_del = self.prod_Name_list.get()
-        del_Product(prod_to_del)
+        del_Product(prod_to_del, 't_productos')
         self.prod_Name_list.set('')
         self.actualizar_lista()
 
