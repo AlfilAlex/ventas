@@ -1,20 +1,11 @@
-#Agregar un producto
-#Agregar el inicio de un nuevo día
-#Agregar una venta para un dia determinado
-#Agregar una cantidad incial para un día determiando
-
 from tkinter import Tk, Button, Frame, Text, ttk, Label, END
 from coordinador import iniciadora
 from productos import prodcutos
-#from tkinter import ttk
-
 from funciones_db import *
 
 
 clase_preparadora = 'clase_en_proceso'
-
 root = Tk()
-#root.geometry('600x300')
 root.title('Venta')
 
 frame = Frame(root, width=500, height=300)
@@ -54,12 +45,6 @@ boton_sumVenta.grid(row=0, column=0)
 boton_resVenta = Button(frame2, text='Restar venta', command=venta) #Aun no resta venta
 boton_resVenta.grid(row=0, column=1)
 
-
-
-# boton_archivo = Button(frame, text='Preparar_Programa', command=iniciador)
-# boton_archivo.grid(row=3, column=0, padx=20, pady=30)
-
-
 label = Label(frame, text="Resumen")
 label.grid(row=3, column=0, padx=20, pady=30)
 #frame3 = Frame(frame)
@@ -69,14 +54,6 @@ outputtxt.grid(row=3, column=1, padx=20, pady=30)
 
 boton_archivo = Button(frame, text='Productos A/B', command = add_Products)
 boton_archivo.grid(row=4, column=0, padx=20, pady=30)
-
-
-
-# combox3 = ttk.Combobox(frame, state="readonly")
-# combox3["values"] = ["Python", "C", "C++", "Java"]
-# combox3.grid(row=2, column=0, padx=20, pady=30)
-
-
 
 root.mainloop()
 
