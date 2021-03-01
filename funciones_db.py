@@ -32,6 +32,22 @@ def prod_Resum():
     tabla = cursor_Insert.fetchall()
     return tabla
 
+def excel_Dias():
+    cursor_Insert, coneccion_Insert = cursor()
+    cursor_Insert.execute("CREATE TABLE IF NOT EXISTS ventas (venta_id INTEGER PRIMARY KEY AUTOINCREMENT, dia VARCHAR(30), hora VARCHAR(30), product_Name INT, sell_Num INT)")
+    cursor_Insert.execute("SELECT dia FROM ventas")
+    tabla = cursor_Insert.fetchall()
+    return tabla
+
+def excel_Data(day):
+    list_Day = [day]
+    cursor_Insert, coneccion_Insert = cursor()
+    cursor_Insert.execute("CREATE TABLE IF NOT EXISTS ventas (venta_id INTEGER PRIMARY KEY AUTOINCREMENT, dia VARCHAR(30), hora VARCHAR(30), product_Name INT, sell_Num INT)")
+    cursor_Insert.execute("SELECT * FROM ventas WHERE dia = ?", list_Day)
+    data = cursor_Insert.fetchall()
+    return data
+
+
 def inicio():
     """Esta funcion crea la base de datos de 'productos' """
     cursor_Insert, coneccion_Insert = cursor()
