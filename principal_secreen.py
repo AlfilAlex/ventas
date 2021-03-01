@@ -1,6 +1,7 @@
 from tkinter import Tk, Button, Frame, Text, ttk, Label, END, messagebox
 from productos import prodcutos
 from funciones_db import *
+from excel_gen import excel_Gen
 
 
 class p_Screen(Frame):
@@ -14,36 +15,38 @@ class p_Screen(Frame):
         self.frame = Frame(self.parent, width=500, height=300)
         self.frame.grid(row=0, column=0)
 
-        self.frame2 = Frame(self.frame, bg = 'red')
-        self.frame2.grid(row=2, column=0, padx=20, pady=30)
+        self.frame2 = Frame(self.frame)#, bg = 'white')
+        self.frame2.grid(row=2, column=0, padx=20, pady=5, columnspan = 2)
 
         self.venta_Prod = ttk.Combobox(self.frame, state="readonly")
         tabla = prod_Select()
         self.venta_Prod["values"] = [x[1] for x in tabla]
-        self.venta_Prod.grid(row=0, column=0, padx=20, pady=30) #, padx=20, pady=30
+        self.venta_Prod.grid(row=0, column=0, padx=20, pady=15) #, padx=20, pady=30
 
         self.venta_Num = ttk.Combobox(self.frame)
         self.venta_Num["values"] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         self.venta_Num.grid(row=0, column=1)
 
         self.boton_sumVenta = Button(self.frame2, text='Sumar venta', command=self.venta)
-        self.boton_sumVenta.grid(row=0, column=0)
+        self.boton_sumVenta.grid(row=0, column=0, padx=20, pady=5)
 
         self.boton_sellDelete = Button(self.frame2, text='Restar venta', command=self.sell_Delete) #Aun no resta venta
-        self.boton_sellDelete.grid(row=0, column=1)
+        self.boton_sellDelete.grid(row=0, column=1, padx=20, pady=5)
 
         self.label = Label(self.frame, text="Resumen")
         self.label.grid(row=3, column=0, padx=20, pady=30)
-        #frame3 = Frame(frame)
+
         self.outputtxt = Text(self.frame, height = 10, width = 25, bg = "light yellow")
         self.outputtxt.grid(row=3, column=1, padx=20, pady=30)
-
 
         self.boton_archivo = Button(self.frame, text='Añadir productos', command = self.add_Products)
         self.boton_archivo.grid(row=4, column=0, padx=20, pady=30)
 
         self.boton_ganancias = Button(self.frame, text='Ganancias', command = self.ganancias_text)
         self.boton_ganancias.grid(row=4, column=1, padx=20, pady=30)
+
+        self.boton_genExcel = Button(self.frame, text='Generar_excel', command = self.Generar_excel)
+        self.boton_genExcel.grid(row=5, column=0, padx=20, pady=30, columnspan = 3)
 
   
     def venta(self):
@@ -83,10 +86,13 @@ class p_Screen(Frame):
         
     def ganancias_text(self):
         tabla = ganancias()
-        print(tabla)
         self.outputtxt.insert(END, 'Ganancias: ' + str(sum([x[0]*x[1] for x in tabla])) + '\n')    
-        
-  
+
+    def Generar_excel(self):
+        root = Tk()
+        excel_Gen(root)
+        root.mainloop()        
+
 
 
 if __name__ == '__main__':
