@@ -1,4 +1,4 @@
-# Ventas_Mama
+# Ventas
 
 # Descripción general
 Es un sistema de ventas simple que cree con Tkinter para ayudar a la gestión del inventario de productos. La idea principal es poder correrlo en dispositivos como arduinos o RP, sin embargo nunca se ha utilizado en uno.
